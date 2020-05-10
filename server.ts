@@ -1,12 +1,10 @@
 // @ts-ignore
-import { Application, HttpError, Router, Status, send } from "https://denopkg.com/Soremwar/oak@v0.41/mod.ts";
+import { Application, HttpError, Router, Status, send } from "https://deno.land/x/oak/mod.ts";
 import { __ } from 'https://deno.land/x/dirname/mod.ts';
-import "https://deno.land/x/dotenv/load.ts";
+// import "https://deno.land/x/dotenv/load.ts";
 const {__dirname } = __(import.meta);
 
-// @ts-ignore
-const env = Deno.env();
-const HOST_PORT = `127.0.0.1:${env.PORT}`;
+const HOST_PORT = `127.0.0.1:1234`;
 
 const server = new Application()
 const router = new Router()
