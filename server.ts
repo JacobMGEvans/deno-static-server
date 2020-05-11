@@ -1,19 +1,22 @@
 // @ts-ignore
-import { Application, HttpError, Router, Status, send } from "https://deno.land/x/oak/mod.ts";
+import { Application, HttpError, Router, Status, send, Context } from "https://deno.land/x/oak/mod.ts";
+// @ts-ignore
 import { __ } from 'https://deno.land/x/dirname/mod.ts';
 // import "https://deno.land/x/dotenv/load.ts";
 const {__dirname } = __(import.meta);
+// @ts-ignore
+import { IErrorContext, IServerContext } from './@types/server.d.ts'
 
-const HOST_PORT = `127.0.0.1:1234`;
+const HOST_PORT: string = `127.0.0.1:1234`;
 
-const server = new Application()
-const router = new Router()
+const server: Application = new Application()
+const router: Router = new Router()
 
 router.get(`*`)
 server.use(router.routes())
 
 // Error handler middleware
-server.use(async (context: any, next:any) => {
+server.use(async (context: Context, next: () => any) => {
   try {
     await next();
   } catch (e) {
@@ -48,7 +51,7 @@ server.use(async (context: any, next:any) => {
 });
 
 server
-  .use(async (context: any) => {
+  .use(async (context: Context) => {
     await send(context, context.request.path,{ 
     root: `${__dirname}`,
     index: "index.html"
