@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Application, HttpError, Router, Status, send, Context } from "https://deno.land/x/oak/mod.ts";
+import { Application, HttpError, Router, Status, send,  } from "https://deno.land/x/oak/mod.ts";
 // @ts-ignore
 import { __ } from 'https://deno.land/x/dirname/mod.ts';
 // import "https://deno.land/x/dotenv/load.ts";
@@ -16,7 +16,7 @@ router.get(`*`)
 server.use(router.routes())
 
 // Error handler middleware
-server.use(async (context: Context, next: () => any) => {
+server.use(async (context , next: () => any) => {
   try {
     await next();
   } catch (e) {
@@ -51,8 +51,9 @@ server.use(async (context: Context, next: () => any) => {
 });
 
 server
-  .use(async (context: Context) => {
-    await send(context, context.request.path,{ 
+  .use(async (context) => {
+    console.log(context, 'CONTEXT')
+    await send(context, '',{ 
     root: `${__dirname}`,
     index: "index.html"
 })

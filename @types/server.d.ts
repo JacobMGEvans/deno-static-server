@@ -5,8 +5,8 @@ export interface IErrorContext{
         } 
     }
 
-export interface IServerContext{
-    request: { 
-        path: any 
-    } 
-}
+// export interface IServerContext{
+//     request: { 
+//         path: any 
+//     } 
+// }
